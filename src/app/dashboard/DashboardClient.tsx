@@ -140,7 +140,7 @@ export default function DashboardClient() {
   const [metrics, setMetrics] = useState<Metrics | null>(null);
   const [history, setHistory] = useState<{ time: string; unfit: number }[]>([]);
   const [complaints, setComplaints] = useState<Complaint[]>([]);
-  const [search, setSearch] = useState<string>("");
+  const [search] = useState<string>("");
   const [loadingMetrics, setLoadingMetrics] = useState<boolean>(false);
   const [loadingComplaints, setLoadingComplaints] = useState<boolean>(false);
   const [jobs, setJobs] = useState<JobCard[]>([]);
