@@ -1,0 +1,20 @@
+global:
+  scrape_interval: 15s   # 15s for fresher metrics, you can use 60s if you prefer
+
+# Push metrics to Grafana Cloud
+remote_write:
+  - url: https://prometheus-prod-43-prod-ap-south-1.grafana.net/api/prom/push
+    basic_auth:
+      username: ${GRAFANA_USER}
+      password: ${GRAFANA_TOKEN}
+scrape_configs:
+  # Scrape your FastAPI app
+  - job_name: "metrosaathi-fastapi"
+    static_configs:
+      - targets: ["host.docker.internal:8000"]
+    metrics_path: "/metrics"
+
+  # Scrape Prometheus itself (optional, for monitoring Prometheus health)
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]

@@ -1,0 +1,87 @@
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: metro_admin
+      POSTGRES_PASSWORD: metro_passsword_1234
+      POSTGRES_DB: metrosaathi
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data   
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@metrosaathi.com
+      PGADMIN_DEFAULT_PASSWORD: pgadmin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+
+  redis:
+    image: redis:7
+    container_name: metro_redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  backend:
+    build:
+      context: .
+    container_name: metro_backend
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    working_dir: /app/src/backend
+    volumes:
+      - ./src/backend:/app/src/backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://metro_admin:metro_passsword_1234@db:5432/metrosaathi
+      SECRET_KEY: supersecretkey
+      ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 60
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      TRAIN_TIME: "18:20"
+      REDIS_URL: redis://redis:6379/0
+      ASSIGNMENT_MAX_TASKS: 3
+      USR_EMAIL: rudranilchowdhury83@gmail.com
+      USR_PASSWORD: iupwfrzztstayulz
+    depends_on:
+      - db
+      - redis
+
+  worker:
+    build:
+      context: .
+    container_name: metro_worker
+    command: celery -A job_distributor.celery_app worker --loglevel=info   # ✅ fix path
+    working_dir: /app/src/backend
+    volumes:
+      - ./src/backend:/app/src/backend
+    environment:
+      DATABASE_URL: postgresql://metro_admin:metro_passsword_1234@db:5432/metrosaathi
+      REDIS_URL: redis://redis:6379/0
+      ASSIGNMENT_MAX_TASKS: 3
+    depends_on:
+      - backend
+      - redis
+
+  beat:
+    build:
+      context: .
+    container_name: metro_beat
+    command: celery -A job_distributor.celery_app beat --loglevel=info   # ✅ fix path
+    working_dir: /app/src/backend
+    volumes:
+      - ./src/backend:/app/src/backend
+    environment:
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      - redis
+
+volumes:
+  postgres_data:

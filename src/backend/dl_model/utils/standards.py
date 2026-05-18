@@ -1,0 +1,15 @@
+standards = {
+    "H1": (0, 10),
+    "DV_pressure": (2, 5),
+    "Reservoirs": (5, 15),
+    "Oil_temperature": (40, 80),
+    "Motor_current": (5, 15),
+    "COMP": ["OK", "NOT_OK"],
+    "DV_electric": ["ON", "OFF"],
+    "Towers": ["OK", "NOT_OK"],
+    "MPG": (1, 10),
+    "LPS": ["Low", "Normal", "High"],
+    "Pressure_switch": ["ON", "OFF"],
+    "Oil_level": (50, 100),
+    "Caudal_impulses": (500, 1500),
+}

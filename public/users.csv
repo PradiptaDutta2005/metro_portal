@@ -1,0 +1,6 @@
+email,password,role
+eng1@example.com,password123,engineer
+eng2@example.com,password123,engineer
+eng3@example.com,password123,engineer
+sup1@example.com,password123,Supervisor
+sup2@example.com,password123,Supervisor

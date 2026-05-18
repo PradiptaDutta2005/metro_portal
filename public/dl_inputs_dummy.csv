@@ -1,0 +1,4 @@
+id,rakeId,H1,DV_pressure,Reservoirs,Oil_temperature,Motor_current,COMP,DV_electric,Towers,MPG,LPS,Pressure_switch,Oil_level,Caudal_impulses,engineer,timestamp
+1,Rake-101,12.5,2.3,45.0,80.1,15.2,COMP-A,ON,Tower-1,5.5,LPS-ON,PS-Active,30.5,120.0,Engineer-1,2025-09-08 07:27:23.461869
+2,Rake-102,14.0,2.5,47.5,79.2,14.8,COMP-B,OFF,Tower-2,6.1,LPS-OFF,PS-Inactive,28.0,115.5,Engineer-2,2025-09-08 07:27:23.461872
+3,Rake-103,13.2,2.1,44.0,81.0,16.0,COMP-C,ON,Tower-3,5.9,LPS-ON,PS-Active,32.0,118.2,Engineer-3,2025-09-08 07:27:23.461873

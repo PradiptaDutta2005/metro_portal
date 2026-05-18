@@ -1,0 +1,41 @@
+# Ignore Python cache and venv
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+.venv/
+venv/
+env/
+
+# Ignore node / frontend stuff if copied
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignore virtual environments & editor settings
+*.egg-info
+.eggs/
+*.egg
+*.log
+.idea/
+.vscode/
+.DS_Store
+
+# Ignore build / dist artifacts
+build/
+dist/
+*.tar.gz
+*.whl
+
+# Ignore Docker-related leftovers
+docker-compose.override.yml
+Dockerfile.*
+
+# Ignore tests (optional, unless you want them in container)
+tests/
+
+# Ignore git
+.git
+.gitignore
